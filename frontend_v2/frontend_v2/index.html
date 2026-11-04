@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> EDR Cyber Defense Console</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Interactive Animated Cyber Grid / Video-like Canvas -->
+    <canvas id="cyberCanvas"></canvas>
+
+    <div class="dashboard-container">
+        <!-- Threat Warning Banner -->
+        <div id="alertBanner" class="alert-banner">
+            <span class="pulse-icon">⚠️</span> CRITICAL THREAT DETECTED: Automated Response Engine neutralized an adversarial process payload!
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="brand">
+                <div class="shield-badge">🛡️</div>
+                <div>
+                    <h1> EDR Incident Detection & Response Console</h1>
+                    <p class="subtitle">Live Endpoint Surveillance, SHA-256 Forensics & Automated Incident Response</p>
+                </div>
+            </div>
+            <div class="status-indicator">
+                <span class="live-dot"></span> LIVE SURVEILLANCE ACTIVE
+            </div>
+        </header>
+
+        <!-- Metrics Row -->
+        <section class="metrics-grid">
+            <div class="metric-card glassmorphism">
+                <div class="metric-title">MONITORED HOST</div>
+                <div class="metric-value highlight-cyan" id="hostName">Bhavasrii</div>
+                <div class="metric-sub">Endpoint Active</div>
+            </div>
+            <div class="metric-card glassmorphism">
+                <div class="metric-title">TOTAL EVENTS LOGGED</div>
+                <div class="metric-value" id="totalEvents">0</div>
+                <div class="metric-sub">Dynamic Ingestion</div>
+            </div>
+            <div class="metric-card glassmorphism">
+                <div class="metric-title">THREATS NEUTRALIZED</div>
+                <div class="metric-value highlight-red" id="threatCount">0</div>
+                <div class="metric-sub">Sub-Second Containment</div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-grid">
+            <div class="chart-card glassmorphism">
+                <h3>THREAT SEVERITY BREAKDOWN</h3>
+                <div class="chart-wrapper">
+                    <canvas id="severityChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card glassmorphism">
+                <h3>TOP EXECUTED PROCESSES</h3>
+                <div class="chart-wrapper">
+                    <canvas id="processChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Telemetry Table -->
+        <section class="table-section glassmorphism">
+            <div class="table-header">
+                <h3>REAL-TIME SECURITY & FORENSIC TELEMETRY</h3>
+            </div>
+            <div class="table-wrapper">
+                <table class="telemetry-table">
+                    <thead>
+                        <tr>
+                            <th>TIMESTAMP</th>
+                            <th>HOST</th>
+                            <th>PID</th>
+                            <th>PROCESS NAME</th>
+                            <th>ATTACK TYPE / SIGNATURE</th>
+                            <th>MITRE ID</th>
+                            <th>SHA-256 FILE HASH</th>
+                            <th>SEVERITY</th>
+                            <th>ACTION</th>
+                            <th>INCIDENT PLAYBOOK</th>
+                        </tr>
+                    </thead>
+                    <tbody id="telemetryBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- Playbook Modal -->
+    <div id="resolutionModal" class="modal-overlay">
+        <div class="modal-card glassmorphism-modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Incident Playbook</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info-grid">
+                    <div><span class="label">EVENT TIMESTAMP:</span> <span id="modalTime" class="val"></span></div>
+                    <div><span class="label">TARGET HOST & PID:</span> <span id="modalTarget" class="val"></span></div>
+                    <div><span class="label">MITRE ATT&CK:</span> <span id="modalMitre" class="val highlight-red"></span></div>
+                    <div><span class="label">FORENSIC SHA-256:</span> <span id="modalHash" class="val hash-text"></span></div>
+                </div>
+                <div class="modal-code-box">
+                    <span class="label">BEHAVIORAL TELEMETRY & COMMAND LINE:</span>
+                    <pre id="modalCmd"></pre>
+                </div>
+                <div class="modal-analysis-box">
+                    <span class="label">ANALYSIS / THREAT INTEL:</span>
+                    <p id="modalDesc"></p>
+                </div>
+                <div class="modal-steps-box" id="modalResolution">
+                    <!-- Populated dynamically -->
+                </div>
+<div class="modal-action-bar">
+    <button id="btnDossier" onclick="generateDossier()" style="display:none; background:#0284c7; color:#fff; border:none; padding:10px 18px; border-radius:6px; font-weight:700; cursor:pointer; margin-right:10px;">📄 Generate Incident Dossier</button>
+    <button id="btnRemediate" onclick="applyRemediation()">⚡ Execute Auto-Remediation</button>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
